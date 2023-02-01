@@ -1,11 +1,12 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Hamburger from '@/components/Hamburger'
+import { useState } from 'react'
+import Menu from '@/components/Menu';
 
 export default function Home() {
+  const [isEffect, setIsEffect] = useState(false);
+
+
   return (
     <>
       <Head>
@@ -14,109 +15,40 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+      <main>
+        <section>
+          <div className={`absolute flex w-full ${!isEffect ? 'bg-black/30' : ''} justify-between h-20 p-5 z-[2]`}>
+            <p className={`text-3xl font-extrabold text-white font-roboto`}>Flips</p>
+            <Hamburger isEffect={isEffect} setIsEffect={setIsEffect} />
           </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
+        </section>
+        <section>
+          <div className="flex">
+            <div className={`bg-gray-200/60 shadow-lg w-full transform duration-[650ms] ${isEffect ? '-translate-x-40 scale-50 translate-y-[2rem] -skew-y-[17deg] hover:scale-[0.51]  pointer-events-none' : ''} `}>
+              <div className={`bg-gray-200/80 shadow-lg w-full transform duration-[650ms] ${isEffect ? 'translate-x-5 -translate-y-6' : ''} `}>
+                <div className={`bg-[url('/bg.jpg')] shadow-lg transform duration-[650ms] h-screen bg-cover ${isEffect ? 'translate-x-5 -translate-y-6' : ''} pointer-events-auto `}>
+                  <div className={`bg-black/30 shadow-lg transform duration-[650ms] h-screen bg-cover pointer-events-auto `}>
+                    <div className='relative top-[35%] mx-32'>
+                      <h1 className='font-roboto font-extrabold text-white text-center text-6xl mb-10'>TREND IS HERE</h1>
+                      <p className='font-roboto font-semibold text-white text-justify lg:px-32 mb-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eros ligula, molestie et metus eget, dictum venenatis nisi. Proin id scelerisque ante. Nulla ornare nisi eu justo vehicula pulvinar. Praesent sit amet risus non ex venenatis sollicitudin non eu nulla. Donec sagittis, nulla vel ultrices lobortis, turpis dui condimentum massa, id scelerisque nibh tellus sed nulla.</p>
+                      <div className='w-full text-center'>
+                        <button onClick={() => setIsEffect(!isEffect)} className='font-roboto font-semibold text-sm lg:w-48 text-white bg-blue-500 border-2 p-4 rounded-full'>KNOW MORE</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={`h-full w-4/12 relative text-white top-[78px] ${isEffect ? 'flex flex-col' : 'hidden'}`}>
+              <Menu isEffect={isEffect} setIsEffect={setIsEffect}>HOME</Menu>
+              <Menu isEffect={isEffect} setIsEffect={setIsEffect}>ABOUT</Menu>
+              <Menu isEffect={isEffect} setIsEffect={setIsEffect}>SERVICES</Menu>
+              <Menu isEffect={isEffect} setIsEffect={setIsEffect}>PROJECTS</Menu>
+              <Menu isEffect={isEffect} setIsEffect={setIsEffect}>TESTIMONIALS</Menu>
+              <Menu isEffect={isEffect} setIsEffect={setIsEffect}>CONTACT</Menu>
+            </div>
           </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
+        </section>
       </main>
     </>
   )
